@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="css/admin.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Top Navigation -->
+    <nav class="admin-nav">
+        <div class="nav-left">
+            <button id="menuToggle" class="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </button>
+            <img src="assets/logo.png" alt="Logo" class="logo">
+            <h1>Admin Dashboard</h1>
+        </div>
+        <div class="nav-right">
+            <div class="search-box">
+                <i class="fas fa-search"></i>
+                <input type="text" placeholder="Search...">
+            </div>
+            <div class="notifications">
+                <i class="fas fa-bell"></i>
+                <span class="badge">3</span>
+            </div>
+            <div class="admin-profile">
+                <img src="assets/admin-avatar.png" alt="Admin">
+                <div class="profile-info">
+                    <!-- <span class="name">Admin</span> -->
+                    <!-- <span class="role">Super Admin</span> -->
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Container -->
+    <div class="admin-container">
+        <!-- Sidebar -->
+        <aside class="admin-sidebar">
+            <div class="menu-section">
+                <h3>MAIN MENU</h3>
+                <div class="menu">
+                    <a href="#" class="menu-item active" data-section="dashboard">
+                        <i class="fas fa-home"></i>
+                        <span>Dashboard</span>
+                    </a>
+                    <a href="#" class="menu-item" data-section="users">
+                        <i class="fas fa-users"></i>
+                        <span>Users</span>
+                        <span class="badge">25</span>
+                    </a>
+                    <a href="#" class="menu-item" data-section="services">
+                        <i class="fas fa-briefcase"></i>
+                        <span>Services</span>
+                        <span class="badge">12</span>
+                    </a>
+                    <a href="#" class="menu-item" data-section="requests">
+                        <i class="fas fa-tasks"></i>
+                        <span>Requests</span>
+                        <span class="badge warning">8</span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="menu-section">
+                <h3>MANAGEMENT</h3>
+                <div class="menu">
+                    <a href="#" class="menu-item" data-section="reports">
+                        <i class="fas fa-chart-bar"></i>
+                        <span>Reports</span>
+                    </a>
+                    <a href="#" class="menu-item" data-section="settings">
+                        <i class="fas fa-cog"></i>
+                        <span>Settings</span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="sidebar-footer">
+                <button id="logoutBtn" class="logout-btn">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Logout</span>
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="admin-main">
+            <!-- Dashboard Section -->
+            <section id="dashboard" class="section active">
+                <div class="section-header">
+                    <h2>Dashboard Overview</h2>
+                    <select id="dateRange">
+                        <option value="today">Today</option>
+                        <option value="week">This Week</option>
+                        <option value="month">This Month</option>
+                        <option value="year">This Year</option>
+                    </select>
+                </div>
+
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon users">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3>Total Users</h3>
+                            <p id="totalUsers">0</p>
+                            <span class="trend up">+12.5%</span>
+                        </div>
+                    </div>
+                    <!-- Add more stat cards as needed -->
+                </div>
+
+                <div class="chart-container">
+                    <div class="chart-card">
+                        <h3>Service Requests Trend</h3>
+                        <canvas id="requestsTrend"></canvas>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Add this after the dashboard section -->
+            <section id="services" class="section">
+                <div class="section-header">
+                    <h2>Services Management</h2>
+                    <button class="btn-primary" onclick="admin.showAddServiceModal()">
+                        <i class="fas fa-plus"></i> Add Service
+                    </button>
+                </div>
+
+                <div class="services-grid" id="servicesList">
+                    <!-- Services will be loaded here dynamically -->
+                </div>
+
+                <!-- Service Modal -->
+                <div id="serviceModal" class="modal">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h3 id="modalTitle">Add Service</h3>
+                            <button class="close-btn" onclick="admin.closeServiceModal()">×</button>
+                        </div>
+                        <form id="serviceForm" onsubmit="admin.handleServiceSubmit(event)">
+                            <div class="form-group">
+                                <label>Service Name</label>
+                                <input type="text" id="serviceName" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Description</label>
+                                <textarea id="serviceDescription" required></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label>Price ($)</label>
+                                <input type="number" id="servicePrice" required min="0" step="0.01">
+                            </div>
+                            <div class="form-group">
+                                <label>Category</label>
+                                <select id="serviceCategory" required>
+                                    <option value="repair">Repair</option>
+                                    <option value="installation">Installation</option>
+                                    <option value="recovery">Recovery</option>
+                                    <option value="maintenance">Maintenance</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Status</label>
+                                <select id="serviceStatus" required>
+                                    <option value="active">Active</option>
+                                    <option value="inactive">Inactive</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Service Image</label>
+                                <input type="text" id="serviceImage" placeholder="images/services/example.jpg">
+                                <div id="imagePreview" class="image-preview"></div>
+                            </div>
+                            <input type="hidden" id="serviceId">
+                            <button type="submit" class="btn-primary">Save Service</button>
+                        </form>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Other sections will be added dynamically -->
+        </main>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="js/adminAuth.js"></script>
+    <script src="js/admin.js"></script>
+</body>
+</html> 

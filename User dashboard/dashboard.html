@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professional Dashboard - All Solutions</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body class="light-mode">
+    <!-- Top Navigation -->
+    <nav class="dashboard-nav">
+        <div class="nav-left">
+            <button id="menuToggle" class="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </button>
+            <h1>All Solutions</h1>
+        </div>
+        <div class="nav-right">
+            <button id="themeToggle" class="theme-toggle">
+                <i class="fas fa-moon"></i>
+            </button>
+            <div class="notifications">
+                <i class="fas fa-bell"></i>
+                <span class="notification-badge">0</span>
+            </div>
+            <div class="user-profile">
+                <img id="profileImage" src="assets/default-avatar.png" alt="Profile">
+                <div class="user-info">
+                    <span id="userName">Loading...</span>
+                    <small id="userEmail">loading@email.com</small>
+                </div>
+            </div>
+            <div class="cart-icon">
+                <i class="fas fa-shopping-cart"></i>
+                <span id="cartCount" class="cart-badge">0</span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Dashboard Container -->
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="dashboard-sidebar">
+            <div class="sidebar-menu">
+                <a href="#overview" class="menu-item active" data-section="overview">
+                    <i class="fas fa-home"></i>
+                    <span>Overview</span>
+                </a>
+                <a href="#services" class="menu-item" data-section="services">
+                    <i class="fas fa-briefcase"></i>
+                    <span>My Services</span>
+                </a>
+                <a href="#support" class="menu-item" data-section="support">
+                    <i class="fas fa-headset"></i>
+                    <span>Support & Queries</span>
+                </a>
+                <a href="#profile" class="menu-item" data-section="profile">
+                    <i class="fas fa-user"></i>
+                    <span>Profile Settings</span>
+                </a>
+                <a href="#catalog" class="menu-item" data-section="catalog">
+                    <i class="fas fa-store"></i>
+                    <span>Service Catalog</span>
+                </a>
+            </div>
+            <div class="sidebar-footer">
+                <button onclick="auth.logout()" class="logout-btn">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Logout</span>
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="dashboard-main">
+            <!-- Overview Section -->
+            <section id="overview" class="dashboard-section active">
+                <div class="welcome-card">
+                    <h2>Welcome back, <span id="welcomeName">User</span>!</h2>
+                    <p>Here's an overview of your service requests and activities.</p>
+                </div>
+
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon pending">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3>Pending</h3>
+                            <p id="pendingCount">0</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon progress">
+                            <i class="fas fa-spinner"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3>In Progress</h3>
+                            <p id="progressCount">0</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon completed">
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3>Completed</h3>
+                            <p id="completedCount">0</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="recent-activity">
+                    <h3>Recent Activity</h3>
+                    <div id="activityList" class="activity-list">
+                        <!-- Activity items will be added here -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- Services Section -->
+            <section id="services" class="dashboard-section">
+                <div class="section-header">
+                    <h2>My Services</h2>
+                    <button class="new-request-btn" onclick="showNewServiceModal()">
+                        <i class="fas fa-plus"></i> New Request
+                    </button>
+                </div>
+
+                <div class="service-filters">
+                    <button class="filter-btn active" data-filter="all">All</button>
+                    <button class="filter-btn" data-filter="pending">Pending</button>
+                    <button class="filter-btn" data-filter="progress">In Progress</button>
+                    <button class="filter-btn" data-filter="completed">Completed</button>
+                </div>
+
+                <div id="servicesList" class="services-grid">
+                    <!-- Service cards will be added here -->
+                </div>
+            </section>
+
+            <!-- Support Section -->
+            <section id="support" class="dashboard-section">
+                <div class="section-header">
+                    <h2>Support & Queries</h2>
+                    <button class="new-query-btn" onclick="showNewQueryModal()">
+                        <i class="fas fa-plus"></i> New Query
+                    </button>
+                </div>
+
+                <div class="support-container">
+                    <div class="queries-list">
+                        <!-- Query items will be added here -->
+                    </div>
+                    <div class="chat-window">
+                        <div class="chat-messages">
+                            <!-- Chat messages will be added here -->
+                        </div>
+                        <div class="chat-input">
+                            <textarea placeholder="Type your message..."></textarea>
+                            <button><i class="fas fa-paper-plane"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Profile Section -->
+            <section id="profile" class="dashboard-section">
+                <div class="profile-container">
+                    <div class="profile-header">
+                        <div class="profile-avatar">
+                            <img id="avatarPreview" src="assets/default-avatar.png" alt="Profile">
+                            <button class="change-avatar-btn">
+                                <i class="fas fa-camera"></i>
+                            </button>
+                            <input type="file" id="avatarInput" hidden accept="image/*">
+                        </div>
+                        <div class="profile-info">
+                            <h2 id="profileName">User Name</h2>
+                            <p id="profileEmail">user@email.com</p>
+                        </div>
+                    </div>
+
+                    <div class="profile-form">
+                        <form id="profileUpdateForm">
+                            <div class="form-group">
+                                <label>Full Name</label>
+                                <input type="text" id="nameInput" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Mobile Number</label>
+                                <input type="tel" id="mobileInput" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Email</label>
+                                <input type="email" id="emailInput" readonly>
+                            </div>
+                            <button type="submit" class="update-profile-btn">
+                                Update Profile
+                            </button>
+                        </form>
+
+                        <div class="password-section">
+                            <h3>Change Password</h3>
+                            <form id="passwordChangeForm">
+                                <div class="form-group">
+                                    <label>Current Password</label>
+                                    <input type="password" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>New Password</label>
+                                    <input type="password" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Confirm New Password</label>
+                                    <input type="password" required>
+                                </div>
+                                <button type="submit" class="change-password-btn">
+                                    Change Password
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Catalog Section -->
+            <section id="catalog" class="dashboard-section">
+                <div class="section-header">
+                    <h2>Service Catalog</h2>
+                    <div class="catalog-actions">
+                        <button class="cart-btn" onclick="dashboard.showCart()">
+                            <i class="fas fa-shopping-cart"></i>
+                            <span id="cartCount" class="cart-badge">0</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="catalog-container">
+                    <!-- Categories will be added here -->
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="js/auth.js"></script>
+    <script src="js/dashboard.js"></script>
+</body>
+</html> 

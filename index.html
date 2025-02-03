@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Solutions on a Single Platform</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="logo">
+            <h1>All Solutions</h1>
+        </div>
+        <div class="nav-links">
+            <a href="#home">Home</a>
+            <a href="#services">Services</a>
+            <a href="#contact">Contact</a>
+            <div class="auth-buttons">
+                <button id="loginBtn" class="btn-primary">Login</button>
+                <button id="signupBtn" class="btn-secondary">Sign Up</button>
+            </div>
+        </div>
+    </nav>
+
+    <!--dd this right after the navbar, before the main content -->
+    <div id="authModal" class="modal">
+        <div class="modal-content">
+            <!-- Login Form -->
+            <div class="auth-form-container" id="loginContainer">
+                <div class="auth-header">
+                    <img src="images/logo.png" alt="Logo" class="auth-logo">
+                    <h2>Welcome Back</h2>
+                    <button class="close-btn" onclick="closeAuthModal()">&times;</button>
+                </div>
+                <form id="loginForm" class="auth-form">
+                    <div class="form-group">
+                        <label><i class="fas fa-envelope"></i> Email</label>
+                        <input type="email" id="loginEmail" placeholder="Enter your email" required>
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-lock"></i> Password</label>
+                        <div class="password-input">
+                            <input type="password" id="loginPassword" placeholder="Enter your password" required>
+                            <i class="fas fa-eye toggle-password"></i>
+                        </div>
+                    </div>
+                    <div class="form-options">
+                        <label class="remember-me">
+                            <input type="checkbox" id="rememberMe">
+                            <span>Remember me</span>
+                        </label>
+                        <a href="#" class="forgot-link">Forgot Password?</a>
+                    </div>
+                    <button type="submit" class="auth-btn">Login</button>
+                    <div class="auth-separator">
+                        <span>OR</span>
+                    </div>
+                    <div class="social-login">
+                        <button type="button" class="google-btn">
+                            <img src="images/google-icon.png" alt="Google">
+                            Continue with Google
+                        </button>
+                    </div>
+                    <div class="auth-footer">
+                        <p>Don't have an account? <a href="#" onclick="showRegister()">Sign Up</a></p>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Register Form -->
+            <div class="auth-form-container hidden" id="registerContainer">
+                <div class="auth-header">
+                    <img src="images/logo.png" alt="Logo" class="auth-logo">
+                    <h2>Create Account</h2>
+                    <button class="close-btn" onclick="auth.closeAuthModal()" aria-label="Close">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <form id="registerForm" class="auth-form">
+                    <div class="form-group">
+                        <label><i class="fas fa-user"></i> Full Name</label>
+                        <input type="text" id="regName" placeholder="Enter your full name" required>
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-envelope"></i> Email</label>
+                        <input type="email" id="regEmail" placeholder="Enter your email" required>
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-phone"></i> Mobile</label>
+                        <input type="tel" id="regMobile" placeholder="Enter your mobile number" required>
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-lock"></i> Password</label>
+                        <div class="password-input">
+                            <input type="password" id="regPassword" placeholder="Create a password" required>
+                            <i class="fas fa-eye toggle-password"></i>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-lock"></i> Confirm Password</label>
+                        <div class="password-input">
+                            <input type="password" id="regConfirmPassword" placeholder="Confirm your password" required>
+                            <i class="fas fa-eye toggle-password"></i>
+                        </div>
+                    </div>
+                    <button type="submit" class="auth-btn">Create Account</button>
+                    <div class="auth-footer">
+                        <p>Already have an account? <a href="#" onclick="showLogin()">Login</a></p>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1>All Solutions on a Single Platform</h1>
+            <p>Your one-stop destination for Business, Financial Planning, Civil Works, and Product Design</p>
+            <div class="hero-buttons">
+                <button class="cta-button" onclick="scrollToServices()">Get Started</button>
+                <button class="secondary-cta" onclick="scrollToAbout()">Learn More</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <h2 class="section-title">About Us</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p class="lead">Welcome to <strong>"All Solutions on a Single Platform"</strong>, your one-stop destination for Business Services, Financial Planning, Civil Engineering, and Product Design.</p>
+                    
+                    <p>Our mission is to simplify complex processes, ensuring seamless service execution with professionalism and expertise. Whether you need business compliance, financial assistance, engineering support, or creative design solutions, we've got you covered.</p>
+                    
+                    <p>With a dedicated team of experts, we deliver high-quality, customized services tailored to meet your specific needs. From obtaining business licenses to designing impactful brand identities, we make every step easy and hassle-free.</p>
+                </div>
+                <div class="about-features">
+                    <div class="feature">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Professional Expertise</span>
+                    </div>
+                    <div class="feature">
+                        <i class="fas fa-clock"></i>
+                        <span>Timely Delivery</span>
+                    </div>
+                    <div class="feature">
+                        <i class="fas fa-handshake"></i>
+                        <span>Customer Satisfaction</span>
+                    </div>
+                    <div class="feature">
+                        <i class="fas fa-shield-alt"></i>
+                        <span>Quality Assurance</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="services">
+        <h1 class="main-title">Our Services</h1>
+        
+        <!-- Project Documentation Section -->
+        <h2 class="service-category">Project Documentation</h2>
+        <div class="service-grid">
+            <!-- DPR Card -->
+            <div class="service-card">
+                <div class="icon-container">
+                    <i class="fas fa-file-alt"></i>
+                </div>
+                <h3>DPR</h3>
+                <p>Detailed Project Report</p>
+                <button class="view-details-btn" onclick="showServiceDetails('dpr')">View Details</button>
+            </div>
+
+            <!-- Trade License Card -->
+            <div class="service-card">
+                <div class="icon-container">
+                    <i class="fas fa-certificate"></i>
+                </div>
+                <h3>Trade License</h3>
+                <p>Business Trade License Documentation</p>
+                <button class="view-details-btn" onclick="showServiceDetails('trade-license')">View Details</button>
+            </div>
+
+            <!-- NOC Certificate Card -->
+            <div class="service-card">
+                <div class="icon-container">
+                    <i class="fas fa-file-contract"></i>
+                </div>
+                <h3>NOC Certificate</h3>
+                <p>No Objection Certificates</p>
+                <button class="view-details-btn" onclick="showServiceDetails('noc')">View Details</button>
+            </div>
+
+            <!-- PCB Certificate Card -->
+            <div class="service-card">
+                <div class="icon-container">
+                    <i class="fas fa-leaf"></i>
+                </div>
+                <h3>PCB Certificate</h3>
+                <p>CTE & CTO Certifications</p>
+                <button class="view-details-btn" onclick="showServiceDetails('pcb')">View Details</button>
+            </div>
+        </div>
+
+        <!-- Financial Services Section -->
+        <h2 class="service-category">Financial Services</h2>
+        <div class="service-grid">
+            <!-- Bank Loan Card -->
+            <div class="service-card">
+                <div class="icon-container">
+                    <i class="fas fa-university"></i>
+                </div>
+                <h3>Bank Loan</h3>
+                <p>Bank Loan Sanction & Processing</p>
+                <button class="view-details-btn" onclick="showServiceDetails('bank-loan')">View Details</button>
+            </div>
+
+            <!-- CC & Term Loan Card -->
+            <div class="service-card">
+                <div class="icon-container">
+                    <i class="fas fa-money-check-alt"></i>
+                </div>
+                <h3>CC & Term Loan</h3>
+                <p>Working Capital & Term Loan Support</p>
+                <button class="view-details-btn" onclick="showServiceDetails('term-loan')">View Details</button>
+            </div>
+
+            <!-- Income Tax Card -->
+            <div class="service-card">
+                <div class="icon-container">
+                    <i class="fas fa-file-invoice-dollar"></i>
+                </div>
+                <h3>Income Tax</h3>
+                <p>Tax Filing & Compliance Services</p>
+                <button class="view-details-btn" onclick="showServiceDetails('income-tax')">View Details</button>
+            </div>
+
+            <!-- GST Services Card -->
+            <div class="service-card">
+                <div class="icon-container">
+                    <i class="fas fa-receipt"></i>
+                </div>
+                <h3>GST Services</h3>
+                <p>GST Registration & Filing</p>
+                <button class="view-details-btn" onclick="showServiceDetails('gst')">View Details</button>
+            </div>
+        </div>
+
+        <!-- Civil Services Section -->
+        <h2 class="service-category">Civil Services</h2>
+        <div class="service-grid">
+            <!-- CAD Drawing Card -->
+            <div class="service-card">
+                <div class="icon-container">
+                    <i class="fas fa-drafting-compass"></i>
+                </div>
+                <h3>CAD Drawing</h3>
+                <p>Engineering & Architectural Drawings</p>
+                <button class="view-details-btn" onclick="showServiceDetails('cad')">View Details</button>
+            </div>
+
+            <!-- Construction Card -->
+            <div class="service-card">
+                <div class="icon-container">
+                    <i class="fas fa-hard-hat"></i>
+                </div>
+                <h3>Construction</h3>
+                <p>Site Construction Management</p>
+                <button class="view-details-btn" onclick="showServiceDetails('construction')">View Details</button>
+            </div>
+
+            <!-- Labor Support Card -->
+            <div class="service-card">
+                <div class="icon-container">
+                    <i class="fas fa-users-cog"></i>
+                </div>
+                <h3>Labor Support</h3>
+                <p>Skilled & Unskilled Labor Management</p>
+                <button class="view-details-btn" onclick="showServiceDetails('labor')">View Details</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="contact-container">
+            <h2 class="section-title">Contact Us</h2>
+            <div class="contact-wrapper">
+                <div class="contact-info">
+                    <h3>Get in Touch</h3>
+                    <p class="contact-description">Feel free to reach out to us for any inquiries or assistance.</p>
+                    
+                    <div class="contact-details">
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <div class="contact-text">
+                                <h4>Email</h4>
+                                <p>biswajit.bb61@gmail.com</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <i class="fas fa-phone"></i>
+                            <div class="contact-text">
+                                <h4>Phone</h4>
+
+                                <p>+91 9706039769</p>
+                                <p>+91 7002321267</p>
+                                <p>+91 7002255707</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <div class="contact-text">
+                                <h4>Location</h4>
+                                <p>Bongaigaon, Assam, 783380, India</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="copyright">
+                <p>&copy; 2024 All Solutions on a Single Platform. All Rights Reserved.</p>
+            </div>
+            <div class="designer-credit">
+                <p>Designed with <i class="fas fa-heart"></i> by Biswajit</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Service Details Modal -->
+    <div id="serviceDetailsModal" class="modal service-details">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeServiceModal()">&times;</span>
+            <div id="serviceDetailsContent"></div>
+        </div>
+    </div>
+
+    <script src="js/main.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/services.js"></script>
+</body>
+</html> 
