@@ -1,0 +1,1 @@
+# All-solution-on-a-single-platfrom
